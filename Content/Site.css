@@ -19,11 +19,10 @@ textarea {
 }
 
 .nav-pills > li > a {
-    color: lightgray
+    color: lightgray;
 }
 
-
-.nav-pills > li > a.active {
-    background-color: darkgray !important;
-    color: lightgray
+#pills-tab {
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
