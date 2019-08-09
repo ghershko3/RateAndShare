@@ -1,5 +1,7 @@
 ﻿$(document).ready(() => {
-    $(".nav-link").click(() => {
-        alert("hi")
-    })
+    selectedTab = ''
+
+    //$("#A").click(() => {
+    //    alert("hi")
+    //})
 })
