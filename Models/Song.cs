@@ -12,5 +12,7 @@ namespace RateAndShare.Models
         public string ArtistName { get; set; }
         public string Genre { get; set; }
         public string YoutubeLink { get; set; }
+
+        public virtual ICollection<Rate> Rates { get; set; }
     }
 }
