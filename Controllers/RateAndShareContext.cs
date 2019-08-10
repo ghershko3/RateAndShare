@@ -1,6 +1,9 @@
-﻿namespace RateAndShare.Controllers
+﻿using System.Data.Entity;
+
+namespace RateAndShare.Controllers
 {
-    internal class RateAndShareContext
+    public class RateAndShareContext : DbContext
     {
+
     }
 }

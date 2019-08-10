@@ -81,3 +81,7 @@ C:\Users\ghers\source\repos\RateAndShare\RateAndShare\bin\EntityFramework.dll
 C:\Users\ghers\source\repos\RateAndShare\RateAndShare\bin\EntityFramework.SqlServer.dll
 C:\Users\ghers\source\repos\RateAndShare\RateAndShare\bin\EntityFramework.xml
 C:\Users\ghers\source\repos\RateAndShare\RateAndShare\bin\EntityFramework.SqlServer.xml
+D:\Assaf\RateAndShare\obj\Debug\RateAndShare.dll
+D:\Assaf\RateAndShare\obj\Debug\RateAndShare.pdb
+D:\Assaf\RateAndShare\obj\Debug\RateAndShare.csprojAssemblyReference.cache
+D:\Assaf\RateAndShare\obj\Debug\RateAndShare.csproj.CoreCompileInputs.cache
