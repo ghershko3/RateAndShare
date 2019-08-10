@@ -46,7 +46,7 @@ namespace RateAndShare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SongId,SongName,ArtistName,Genre,YoutubeLink")] Song song)
+        public ActionResult Create([Bind(Include = "ID,SongName,ArtistName,Genre,YoutubeLink")] Song song)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace RateAndShare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SongId,SongName,ArtistName,Genre,YoutubeLink")] Song song)
+        public ActionResult Edit([Bind(Include = "ID,SongName,ArtistName,Genre,YoutubeLink")] Song song)
         {
             if (ModelState.IsValid)
             {

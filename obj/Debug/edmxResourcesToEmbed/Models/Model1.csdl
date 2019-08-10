@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumOfStars" Type="Int32" Nullable="false" />
+    <Property Name="Song_ID" Type="Int32" />
+    <NavigationProperty Name="Song" Relationship="Self.FK_dbo_Rates_dbo_Songs_Song_ID" FromRole="Rates" ToRole="Songs" />
+  </EntityType>
+  <EntityType Name="Song">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SongName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ArtistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="YoutubeLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Rates" Relationship="Self.FK_dbo_Rates_dbo_Songs_Song_ID" FromRole="Songs" ToRole="Rates" />
+  </EntityType>
+  <Association Name="FK_dbo_Rates_dbo_Songs_Song_ID">
+    <End Role="Songs" Type="Self.Song" Multiplicity="0..1" />
+    <End Role="Rates" Type="Self.Rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Songs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Rates">
+        <PropertyRef Name="Song_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Rates" EntityType="Self.Rate" />
+    <EntitySet Name="Songs" EntityType="Self.Song" />
+    <AssociationSet Name="FK_dbo_Rates_dbo_Songs_Song_ID" Association="Self.FK_dbo_Rates_dbo_Songs_Song_ID">
+      <End Role="Songs" EntitySet="Songs" />
+      <End Role="Rates" EntitySet="Rates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
