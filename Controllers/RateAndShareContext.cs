@@ -10,15 +10,20 @@ namespace RateAndShare.Controllers
 
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Song>()
-                .HasKey(song => song.SongId);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Song>()
+        //        .HasKey(song => song.SongId);
 
-            modelBuilder.Entity<Rate>()
-                .HasKey(rate => rate.ID);
-        }
+        //    modelBuilder.Entity<Rate>()
+        //        .HasKey(rate => rate.ID);
+
+        //    modelBuilder.Entity<User>()
+        //        .HasKey(user => user.UserId);
+        //}
+
         public DbSet<Song> Songs { get; set; }
         public DbSet<Rate> Rates { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
