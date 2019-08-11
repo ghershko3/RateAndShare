@@ -4,48 +4,36 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Songs</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("+", "Create", "Songs", null, new { @class = "btn btn-outline-light fab" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SongName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Genre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.YoutubeLink)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SongName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.YoutubeLink)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SongId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SongId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SongId })
-        </td>
-    </tr>
-}
 
-</table>
+<div class="d-flex justify-content-between flex-wrap">
+
+    @foreach (var item in Model)
+    {
+        var URLId = item.YoutubeLink.Substring(item.YoutubeLink.IndexOf("?v=") + 3);
+        string embedlink = "https://www.youtube.com/embed/" + URLId;
+
+        <div class="p-2 bd-highlight">
+            <div class="card p-3 mb-2 bg-light text-dark" style="width: 18rem;">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="@embedlink" allowfullscreen></iframe>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title"> @item.SongName </h5>
+                    <p class="card-text"> @item.ArtistName </p>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SongId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.SongId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SongId })
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
