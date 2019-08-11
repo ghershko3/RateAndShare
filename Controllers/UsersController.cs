@@ -74,5 +74,14 @@ namespace RateAndShare.Controllers
         {
             return db.Users.Any(user => user.Username == p_username && user.Password == p_password);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -29,7 +29,11 @@ namespace RateAndShare.Models
         public string Email { get; set; }
 
         public bool IsAdmin { get; private set; }
+        
+        public int CountryId { get; set; }
 
         public virtual ICollection<Rate> Rates { get; set; }
+
+        public virtual Country Country { get; set; }
     }
 }
