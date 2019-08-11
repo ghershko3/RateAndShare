@@ -164,5 +164,14 @@ namespace RateAndShare.Controllers
             int userId = (int)userSession;
             return db.Users.Any(user => user.UserId == userId && user.IsAdmin);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
