@@ -31,7 +31,7 @@ namespace RateAndShare.Controllers
                 int userId = db.Users.First(user => user.Username == p_user.Username).UserId;
                 HttpContext.Session.Add(SessionName, userId);
                 return RedirectToAction("Index", "Home");
-            } 
+            }
             else
             {
                 ViewData["ErrMessage"] = "Incorrect user name or password";
