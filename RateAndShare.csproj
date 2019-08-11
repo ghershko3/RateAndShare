@@ -131,9 +131,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908111216299_Initial.cs" />
-    <Compile Include="Migrations\201908111216299_Initial.Designer.cs">
-      <DependentUpon>201908111216299_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201908111154521_Initial.cs" />
+    <Compile Include="Migrations\201908111154521_Initial.Designer.cs">
+      <DependentUpon>201908111154521_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Rate.cs" />
@@ -241,8 +241,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908111216299_Initial.resx">
-      <DependentUpon>201908111216299_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908111154521_Initial.resx">
+      <DependentUpon>201908111154521_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
