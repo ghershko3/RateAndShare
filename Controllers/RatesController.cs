@@ -148,7 +148,7 @@ namespace RateAndShare.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            
+
             return View();
         }
     }
