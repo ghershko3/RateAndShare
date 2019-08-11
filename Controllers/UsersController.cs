@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,7 @@ namespace RateAndShare.Controllers
     public class UsersController : Controller
     {
         public const string SessionName = "UserId";
+
         private RateAndShareContext db = new RateAndShareContext();
 
         // GET: Users
@@ -46,6 +48,13 @@ namespace RateAndShare.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check if there already User with the same username
+                if (db.Users.Any(user => user.Username == p_user.Username))
+                {
+                    ViewData["ErrMessage"] = "The requeseted username is already taken, sorry..";
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 db.Users.Add(p_user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

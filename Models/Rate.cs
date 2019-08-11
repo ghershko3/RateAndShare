@@ -18,6 +18,9 @@ namespace RateAndShare.Models
         [Required]
         public int UserId { get; set; }
 
+        [StringLength(100)]
+        public string Description { get; set; }
+
         public virtual Song Song { get; set; }
 
         public virtual User User { get; set; }

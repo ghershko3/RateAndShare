@@ -12,6 +12,7 @@ namespace RateAndShare.Models
         public User()
         {
             this.Rates = new HashSet<Rate>();
+            this.IsAdmin = false;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,6 +27,8 @@ namespace RateAndShare.Models
 
         [StringLength(50)]
         public string Email { get; set; }
+
+        public bool IsAdmin { get; private set; }
 
         public virtual ICollection<Rate> Rates { get; set; }
     }
