@@ -70,7 +70,7 @@ namespace RateAndShare.Controllers
 
         // POST: Rates/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "SongId,NumOfStars")] Rate p_rate)
+        public async Task<ActionResult> Create([Bind(Include = "SongId,NumOfStars,Description")] Rate p_rate)
         {
             // Check if the user is loged in
             object userSession = HttpContext.Session[UsersController.SessionName];
@@ -96,7 +96,7 @@ namespace RateAndShare.Controllers
 
         // POST: Rates/Edit
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,SongId,NumOfStars")] Rate p_rate)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,SongId,NumOfStars,Description")] Rate p_rate)
         {
             object userSession = HttpContext.Session[UsersController.SessionName];
             if (userSession == null)
@@ -108,11 +108,12 @@ namespace RateAndShare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            int userId = int.Parse((string)userSession);
+            int userId = (int)userSession;
             Rate currentRate = db.Rates.First(rate => rate.ID == p_rate.ID);
 
             // Check if the current user created the requested Rate, user can update rates that only he created
-            if (currentRate.UserId == userId)
+            // Or that the current is user is the admin
+            if (isUserAdmin() || currentRate.UserId == userId)
             {
                 db.Entry(p_rate).State = System.Data.Entity.EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -136,10 +137,10 @@ namespace RateAndShare.Controllers
                 return RedirectToRoute("Users");
             }
 
-            int userId = int.Parse((string)userSession);
+            int userId = (int)userSession;
             Rate rate = db.Rates.Find(id);
 
-            if (rate.UserId == userId)
+            if (isUserAdmin() || rate.UserId == userId)
             {
                 db.Rates.Remove(rate);
                 db.SaveChanges();
@@ -150,6 +151,18 @@ namespace RateAndShare.Controllers
             }
 
             return View();
+        }
+
+        private bool isUserAdmin()
+        {
+            object userSession = HttpContext.Session[UsersController.SessionName];
+            if (userSession == null)
+            {
+                return false;
+            }
+
+            int userId = (int)userSession;
+            return db.Users.Any(user => user.UserId == userId && user.IsAdmin);
         }
     }
 }
