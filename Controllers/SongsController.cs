@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using RateAndShare.Models;
@@ -13,7 +14,6 @@ namespace RateAndShare.Controllers
     public class SongsController : Controller
     {
         private RateAndShareContext db = new RateAndShareContext();
-
         // GET: Songs
         public ActionResult Index()
         {
@@ -46,12 +46,12 @@ namespace RateAndShare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,SongName,ArtistName,Genre,YoutubeLink")] Song song)
+        public async Task<ActionResult> Create([Bind(Include = "SongName,ArtistName,Genre,YoutubeLink")] Song song)
         {
             if (ModelState.IsValid)
             {
                 db.Songs.Add(song);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -78,7 +78,7 @@ namespace RateAndShare.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SongName,ArtistName,Genre,YoutubeLink")] Song song)
+        public ActionResult Edit([Bind(Include = "SongId,SongName,ArtistName,Genre,YoutubeLink")] Song song)
         {
             if (ModelState.IsValid)
             {
@@ -113,15 +113,6 @@ namespace RateAndShare.Controllers
             db.Songs.Remove(song);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -19,8 +19,13 @@ namespace RateAndShare.Controllers
 
             modelBuilder.Entity<Rate>()
                 .HasKey(rate => rate.ID);
+
+            modelBuilder.Entity<User>()
+                .HasKey(user => user.UserId);
         }
+
         public DbSet<Song> Songs { get; set; }
         public DbSet<Rate> Rates { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

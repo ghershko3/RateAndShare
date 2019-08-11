@@ -7,23 +7,19 @@ using System.Web;
 
 namespace RateAndShare.Models
 {
-    public class Song
+    public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int SongId { get; set; }
+        public int UserId { get; set; }
 
         [StringLength(50)]
         [Required]
-        public string SongName { get; set; }
+        public string Username { get; set; }
 
-        [StringLength(100)]
-        public string ArtistName { get; set; }
+        [Required, DataType(DataType.Password), MinLength(3), MaxLength(10)]
+        public string Password { get; set; }
 
-        [StringLength(20)]
-        public string Genre { get; set; }
-
-        [StringLength(30)]
-        public string YoutubeLink { get; set; }
+        [StringLength(50)]
+        public string Email { get; set; }
     }
 }
