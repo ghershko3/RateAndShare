@@ -216,12 +216,12 @@
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Rates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\Rates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
