@@ -9,9 +9,13 @@ using System.Web;
 namespace RateAndShare.Models
 {
     public class Song
-    {
+    { 
+        public Song()
+        {
+            this.Rates = new HashSet<Rate>();
+        }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
         public int SongId { get; set; }
 
         [StringLength(50)]
@@ -28,5 +32,7 @@ namespace RateAndShare.Models
 
         [DisplayName("Youtube Link")]
         public string YoutubeLink { get; set; }
+
+        public virtual ICollection<Rate> Rates { get; set; }
     }
 }

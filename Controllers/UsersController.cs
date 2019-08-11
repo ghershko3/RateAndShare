@@ -42,7 +42,6 @@ namespace RateAndShare.Controllers
 
         // POST: Users/Register
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register([Bind(Include = "Username,Password,Email")] User p_user)
         {
             if (ModelState.IsValid)

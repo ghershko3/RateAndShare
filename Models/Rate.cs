@@ -15,10 +15,11 @@ namespace RateAndShare.Models
         [Required]
         public int NumOfStars { get; set; }
         
+        [Required]
         public int UserId { get; set; }
 
-        public Song Song { get; set; }
+        public virtual Song Song { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -70,7 +70,6 @@ namespace RateAndShare.Controllers
 
         // POST: Rates/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "SongId,NumOfStars")] Rate p_rate)
         {
             // Check if the user is loged in
@@ -78,7 +77,7 @@ namespace RateAndShare.Controllers
             if (userSession != null)
             {
                 // Save the rate with the user id
-                int userId = int.Parse((string)userSession);
+                int userId = (int)userSession;
                 p_rate.UserId = userId;
 
                 if (ModelState.IsValid)
@@ -97,7 +96,6 @@ namespace RateAndShare.Controllers
 
         // POST: Rates/Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ID,SongId,NumOfStars")] Rate p_rate)
         {
             object userSession = HttpContext.Session[UsersController.SessionName];

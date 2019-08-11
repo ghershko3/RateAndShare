@@ -131,9 +131,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908111354536_Initial.cs" />
-    <Compile Include="Migrations\201908111354536_Initial.Designer.cs">
-      <DependentUpon>201908111354536_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201908111409596_Initial.cs" />
+    <Compile Include="Migrations\201908111409596_Initial.Designer.cs">
+      <DependentUpon>201908111409596_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Rate.cs" />
@@ -241,8 +241,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908111354536_Initial.resx">
-      <DependentUpon>201908111354536_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908111409596_Initial.resx">
+      <DependentUpon>201908111409596_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -264,7 +264,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50572</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44337/</IISUrl>
+          <IISUrl>http://localhost:44337/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
