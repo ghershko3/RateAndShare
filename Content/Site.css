@@ -26,3 +26,10 @@ textarea {
     padding-bottom: 5px;
     padding-top: 5px;
 }
+
+.fab {
+    border-radius: 50%;
+    bottom: 60px;
+    right: 15vw;
+    position: absolute;
+}
