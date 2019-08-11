@@ -100,5 +100,5 @@ D:\Assaf\RateAndShare\bin\System.Web.WebPages.Deployment.xml
 D:\Assaf\RateAndShare\bin\System.Web.WebPages.Razor.xml
 D:\Assaf\RateAndShare\bin\Antlr3.Runtime.pdb
 D:\Assaf\RateAndShare\obj\Debug\RateAndShare.csproj.CopyComplete
-D:\Assaf\RateAndShare\obj\Debug\RateAndShare.Migrations.init.resources
+D:\Assaf\RateAndShare\obj\Debug\RateAndShare.Migrations.Initial.resources
 D:\Assaf\RateAndShare\obj\Debug\RateAndShare.csproj.GenerateResource.cache
