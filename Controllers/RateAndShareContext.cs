@@ -12,8 +12,10 @@ namespace RateAndShare.Controllers
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<RateAndShareContext>(null);
+
             modelBuilder.Entity<Song>()
-                .HasKey(song => song.SongId);
+                .HasKey(song => song.ID);
 
             modelBuilder.Entity<Rate>()
                 .HasKey(rate => rate.ID);
