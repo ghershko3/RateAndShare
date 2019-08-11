@@ -9,6 +9,11 @@ namespace RateAndShare.Models
 {
     public class User
     {
+        public User()
+        {
+            this.Rates = new HashSet<Rate>();
+        }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
@@ -21,5 +26,7 @@ namespace RateAndShare.Models
 
         [StringLength(50)]
         public string Email { get; set; }
+
+        public virtual ICollection<Rate> Rates { get; set; }
     }
 }

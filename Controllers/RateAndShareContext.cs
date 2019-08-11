@@ -12,6 +12,7 @@ namespace RateAndShare.Controllers
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Primary key definition
             modelBuilder.Entity<Song>()
                 .HasKey(song => song.SongId);
 
@@ -20,6 +21,13 @@ namespace RateAndShare.Controllers
 
             modelBuilder.Entity<User>()
                 .HasKey(user => user.UserId);
+
+            // Foreign key definition
+            modelBuilder.Entity<Rate>()
+                .HasRequired(rate => rate.Song).WithMany(song => song.Rates).HasForeignKey(rate => rate.SongId).WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Rate>()
+                .HasRequired(rate => rate.User).WithMany(user => user.Rates).HasForeignKey(rate => rate.UserId).WillCascadeOnDelete(true);
         }
 
         public DbSet<Song> Songs { get; set; }
