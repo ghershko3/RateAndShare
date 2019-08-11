@@ -11,6 +11,7 @@ namespace RateAndShare.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
+
         }
 
         protected override void Seed(RateAndShare.Controllers.RateAndShareContext context)
