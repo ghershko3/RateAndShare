@@ -28,6 +28,9 @@
                                 <li class="nav-item">
                                     @Html.ActionLink("Statistics", "Index", "Statistics", null, new { @class = "nav-link" })
                                 </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Weather", "Index", "Countries", null, new { @class = "nav-link" })
+                                </li>
                             }
                             else if (HttpContext.Current.Session["UserId"] == null)
                             {

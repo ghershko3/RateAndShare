@@ -18,19 +18,14 @@ namespace RateAndShare.Controllers
         // GET: Countries
         public ActionResult Index()
         {
-            return View(db.Countries.ToList());
-        }
-
-        // GET: Countries/GetCountryGroupBy
-        public ActionResult GetCountryGroupBy()
-        {
-            JObject countries = new JObject();
-            foreach (Country country in db.Countries.ToList())
+            object userSession = HttpContext.Session[UsersController.SessionName];
+            object isAdminSession = HttpContext.Session[UsersController.SessionIsAdminName];
+            if (userSession != null && (bool)isAdminSession)
             {
-                countries.Add(country.Name, country.Users.Count);
+                return View();
             }
 
-            return View(countries);
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)
