@@ -156,13 +156,9 @@ namespace RateAndShare.Controllers
         private bool isUserAdmin()
         {
             object userSession = HttpContext.Session[UsersController.SessionName];
-            if (userSession == null)
-            {
-                return false;
-            }
+            object isAdminSession = HttpContext.Session[UsersController.SessionIsAdminName];
 
-            int userId = (int)userSession;
-            return db.Users.Any(user => user.UserId == userId && user.IsAdmin);
+            return userSession != null && isAdminSession != null && (bool)isAdminSession;
         }
 
         protected override void Dispose(bool disposing)

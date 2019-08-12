@@ -120,6 +120,7 @@
     <Compile Include="Controllers\RateAndShareContext.cs" />
     <Compile Include="Controllers\RatesController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,7 @@
     <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
