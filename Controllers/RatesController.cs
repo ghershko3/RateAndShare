@@ -16,7 +16,7 @@ namespace RateAndShare.Controllers
         // GET: Rates
         public ActionResult Index()
         {
-            return View();
+            return View(db.Rates.ToList());
         }
 
         // GET: Rates/GetRatesForSong/5
@@ -66,6 +66,13 @@ namespace RateAndShare.Controllers
             }
 
             return View(rates);
+        }
+
+        // GET: Rates/Create
+        public ActionResult Create()
+        {
+            ViewBag.songsList = new SelectList(db.Songs, "SongId", "SongName");
+            return View();
         }
 
         // POST: Rates/Create
