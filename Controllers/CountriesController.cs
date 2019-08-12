@@ -21,21 +21,6 @@ namespace RateAndShare.Controllers
             return View(db.Countries.ToList());
         }
 
-        // GET: Countries/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Country country = db.Countries.Find(id);
-            if (country == null)
-            {
-                return HttpNotFound();
-            }
-            return View(country);
-        }
-
         // GET: Countries/GetCountryGroupBy
         public ActionResult GetCountryGroupBy()
         {

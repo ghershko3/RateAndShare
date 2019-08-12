@@ -29,6 +29,22 @@
                                     @Html.ActionLink("Statistics", "Index", "Statistics", null, new { @class = "nav-link" })
                                 </li>
                             }
+                            else if (HttpContext.Current.Session["UserId"] == null)
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Login", "Login", "Users", null, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Register", "Register", "Users", null, new { @class = "nav-link" })
+                                </li>
+                            }
+
+                            if (HttpContext.Current.Session["UserId"] != null)
+                            {
+                                <li class="nav-item right-nav-item">
+                                    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })
+                                </li>
+                            }
                         }
                     </ul>
                 </div>
