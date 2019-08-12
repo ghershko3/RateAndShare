@@ -1,18 +1,14 @@
-﻿@model IEnumerable<RateAndShare.Models.Country>
+﻿@model  RateAndShare.Models.Country
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="bingMap" style="width:600px;height:400px;"></div>
+<div id="bingMap" style="width:inherit;height:400px;"></div>
 <div>
-    @foreach (var item in Model)
-    {
-        <div>
-            @item.Name has @item.Users.Count users
-        </div>
-    }
+    <p id="temperatureValue"></p>
 </div>
+
 <script type="text/javascript"
         src="https://www.bing.com/api/maps/mapcontrol?callback=bingMapCallback&key=8jdU9kPTCEzVmyT3jRkU~rm3ZVd7SbAdEPp8lygIm8A~AuLnSHivAFETHCaowja_dJ75w4ff92UyxgW5RNfOMUaAVfTUeYeCj5oKEzjm4ItE&setLang=en"
         async defer></script>
@@ -22,6 +18,32 @@
             credentials: '8jdU9kPTCEzVmyT3jRkU~rm3ZVd7SbAdEPp8lygIm8A~AuLnSHivAFETHCaowja_dJ75w4ff92UyxgW5RNfOMUaAVfTUeYeCj5oKEzjm4ItE',
             center: new Microsoft.Maps.Location(0, 0),
             zoom: 1,
+        });
+
+        var pushpin = null;
+        Microsoft.Maps.Events.addHandler(map, 'rightclick', function (e) {
+            if (e.targetType == 'map') {
+                var point = new Microsoft.Maps.Point(e.getX(), e.getY());
+                var loc = e.target.tryPixelToLocation(point);
+                var location = new Microsoft.Maps.Location(loc.latitude, loc.longitude);
+
+                if (pushpin) {
+                    map.entities.remove(pushpin);
+                }
+
+                pushpin = new Microsoft.Maps.Pushpin(location, {
+                    'draggable': false
+                });
+                
+                map.entities.push(pushpin);
+                $.ajax({
+                    type: "GET",
+                    url: 'http://api.openweathermap.org/data/2.5/weather?lat=' + loc.latitude + '&lon=' + loc.longitude + '&units=metric&appid=b5543e7ce381d451ca1e82689d057469',
+                    success: function (data) {
+                        document.getElementById('temperatureValue').innerText = "The temperature on [" + data.coord.lat + "," + data.coord.lon + "] is " + data.main.temp + " celsius";
+                    }
+                });
+            }
         });
     }
 </script>
