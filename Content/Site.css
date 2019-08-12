@@ -33,3 +33,11 @@ textarea {
     right: 15vw;
     position: absolute;
 }
+
+.fa-star {
+    color: gold;
+}
+
+/*.rate :hover {
+    background-color: lightgray;
+}*/

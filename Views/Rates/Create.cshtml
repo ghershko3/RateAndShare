@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-10">
                 <span>1</span>
-                @{ for (var i = 0; i < 5; i++)
+                @{ foreach (int i in Enumerable.Range(0, 5))
                     {
                         <span class="p-1 align-middle">@Html.RadioButtonFor(m => m.NumOfStars, i)</span>
                     }
