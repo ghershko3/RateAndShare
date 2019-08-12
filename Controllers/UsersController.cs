@@ -71,7 +71,7 @@ namespace RateAndShare.Controllers
 
                 db.Users.Add(p_user);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
 
             return View();
