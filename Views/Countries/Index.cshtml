@@ -4,8 +4,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="map"></div>
+<div id="bingMap" style="width:600px;height:400px;"></div>
 <div>
     @foreach (var item in Model)
     {
@@ -13,27 +12,20 @@
             @item.Name has @item.Users.Count users
         </div>
     }
-    </div>
-<script>
-    // Initialize and add the map
-    function initMap() {
-        // The location of Uluru
-        var uluru = { lat: -25.344, lng: 131.036 };
-        // The map, centered at Uluru
-        var map = new google.maps.Map(
-            document.getElementById('map'), { zoom: 4, center: uluru });
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({ position: uluru, map: map });
-    }
-</script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX6QXoL8TXkTTuHLGY1IHEs768wn1BKkY&callback=initMap">
-</script>
+</div>
+<script type="text/javascript"
+        src="https://www.bing.com/api/maps/mapcontrol?callback=bingMapCallback&key=8jdU9kPTCEzVmyT3jRkU~rm3ZVd7SbAdEPp8lygIm8A~AuLnSHivAFETHCaowja_dJ75w4ff92UyxgW5RNfOMUaAVfTUeYeCj5oKEzjm4ItE&setLang=en"
+        async defer></script>
+<script type="text/javascript">
+    function bingMapCallback() {
+        var map = new Microsoft.Maps.Map(document.getElementById("bingMap"), {
+            credentials: '8jdU9kPTCEzVmyT3jRkU~rm3ZVd7SbAdEPp8lygIm8A~AuLnSHivAFETHCaowja_dJ75w4ff92UyxgW5RNfOMUaAVfTUeYeCj5oKEzjm4ItE',
+            center: new Microsoft.Maps.Location(0, 0),
+            zoom: 1,
+        });
 
-<style>
-    #map {
-        width: 100%;
-        height: 400px;
-        background-color: grey;
+        // Add an infobox to the map so that we can display it when a pushpin is clicked.
+        infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
+        infobox.setMap(map);
     }
-</style>
+</script>
