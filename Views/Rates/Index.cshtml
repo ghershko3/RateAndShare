@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<RateAndShare.Models.Rate>
+
+
+<h2>Rates</h2>
+
+<p>
+    @Html.ActionLink("+", "Create", "Rates", null, new { @class = "btn btn-outline-light fab" })
+</p>
+
+
+<div>
+    @foreach (var item in Model)
+    {
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            view comment
+        </button>
+        @item.Song.SongName
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            </div>
+        </div>
+    }
+</div>
+
+
+
+

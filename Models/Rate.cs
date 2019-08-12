@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RateAndShare.Models
@@ -9,10 +10,12 @@ namespace RateAndShare.Models
         public int ID { get; set; }
 
         [Required]
+        [DisplayName("Song")]
         public int SongId { get; set; }
 
         [Range(0,5)]
         [Required]
+        [DisplayName("Rate")]
         public int NumOfStars { get; set; }
         
         [Required]
