@@ -12,6 +12,7 @@ namespace RateAndShare.Controllers
     public class UsersController : Controller
     {
         public const string SessionName = "UserId";
+        public const string SessionIsAdminName = "IsAdmin";
 
         private RateAndShareContext db = new RateAndShareContext();
 
@@ -30,8 +31,13 @@ namespace RateAndShare.Controllers
             // check if the given params are correct and there is a user
             else if (p_user.Username != null && p_user.Password != null && isUserExists(p_user.Username, p_user.Password))
             {
-                int userId = db.Users.First(user => user.Username == p_user.Username).UserId;
+                User currUser = db.Users.First(user => user.Username == p_user.Username);
+                int userId = currUser.UserId;
+                bool isAdmin = currUser.IsAdmin;
+
                 HttpContext.Session.Add(SessionName, userId);
+                HttpContext.Session.Add(SessionIsAdminName, isAdmin);
+
                 return RedirectToAction("Index", "Home");
             }
             else
