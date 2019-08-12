@@ -16,17 +16,18 @@ namespace RateAndShare.Controllers
 
         private RateAndShareContext db = new RateAndShareContext();
 
-        // GET: Users
-        public ActionResult Index()
+        // GET: Users/Login
+        public ActionResult Login()
         {
             return View();
         }
 
+        [HttpPost]
         public ActionResult Login([Bind(Include = "Username,Password")] User p_user)
         {
             if (p_user == null)
             {
-                return View("Login");
+                return View();
             }
             // check if the given params are correct and there is a user
             else if (p_user.Username != null && p_user.Password != null && isUserExists(p_user.Username, p_user.Password))
@@ -45,12 +46,19 @@ namespace RateAndShare.Controllers
                 ViewData["ErrMessage"] = "Incorrect user name or password";
             }
 
-            return View("Login");
+            return View();
+        }
+
+        // GET: Users/Register
+        public ActionResult Register()
+        {
+            ViewData["countries"] = db.Countries.ToList();
+            return View();
         }
 
         // POST: Users/Register
         [HttpPost]
-        public async Task<ActionResult> Register([Bind(Include = "Username,Password,Email")] User p_user)
+        public async Task<ActionResult> Register([Bind(Include = "Username,Password,Email,CountryId")] User p_user)
         {
             if (ModelState.IsValid)
             {
