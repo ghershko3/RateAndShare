@@ -114,20 +114,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RateAndShareContext.cs" />
     <Compile Include="Controllers\RatesController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908112038599_Initial.cs" />
-    <Compile Include="Migrations\201908112038599_Initial.Designer.cs">
-      <DependentUpon>201908112038599_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201908111409596_Initial.cs" />
+    <Compile Include="Migrations\201908111409596_Initial.Designer.cs">
+      <DependentUpon>201908111409596_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
@@ -140,8 +143,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\fonts\octicons.svg" />
-    <Content Include="Content\octicons.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -167,9 +168,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\fonts\octicons.woff" />
-    <Content Include="Content\fonts\octicons.ttf" />
-    <Content Include="Content\fonts\octicons.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -221,13 +219,18 @@
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Rates\Index.cshtml" />
-    <Content Include="Views\Rates\Create.cshtml" />
+    <Content Include="Views\Countries\Create.cshtml" />
+    <Content Include="Views\Countries\Delete.cshtml" />
+    <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\Edit.cshtml" />
+    <Content Include="Views\Countries\Index.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\Rates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -239,8 +242,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908112038599_Initial.resx">
-      <DependentUpon>201908112038599_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908111409596_Initial.resx">
+      <DependentUpon>201908111409596_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

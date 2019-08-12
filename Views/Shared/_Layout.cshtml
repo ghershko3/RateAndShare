@@ -22,9 +22,14 @@
                         <li class="nav-item">
                             @Html.ActionLink("Songs", "Index", "Songs", null, new { @class = "nav-link" })
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Users", "Index", "Users", null, new { @class = "nav-link" })
-                        </li>
+                        @{
+                            if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"])
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Statistics", "Index", "Statistics", null, new { @class = "nav-link" })
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

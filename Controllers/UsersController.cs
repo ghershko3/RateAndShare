@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,8 @@ namespace RateAndShare.Controllers
     public class UsersController : Controller
     {
         public const string SessionName = "UserId";
+        public const string SessionIsAdminName = "IsAdmin";
+
         private RateAndShareContext db = new RateAndShareContext();
 
         // GET: Users
@@ -28,8 +31,13 @@ namespace RateAndShare.Controllers
             // check if the given params are correct and there is a user
             else if (p_user.Username != null && p_user.Password != null && isUserExists(p_user.Username, p_user.Password))
             {
-                int userId = db.Users.First(user => user.Username == p_user.Username).UserId;
+                User currUser = db.Users.First(user => user.Username == p_user.Username);
+                int userId = currUser.UserId;
+                bool isAdmin = currUser.IsAdmin;
+
                 HttpContext.Session.Add(SessionName, userId);
+                HttpContext.Session.Add(SessionIsAdminName, isAdmin);
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -46,6 +54,13 @@ namespace RateAndShare.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Check if there already User with the same username
+                if (db.Users.Any(user => user.Username == p_user.Username))
+                {
+                    ViewData["ErrMessage"] = "The requeseted username is already taken, sorry..";
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 db.Users.Add(p_user);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -64,6 +79,15 @@ namespace RateAndShare.Controllers
         private bool isUserExists(string p_username, string p_password)
         {
             return db.Users.Any(user => user.Username == p_username && user.Password == p_password);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
