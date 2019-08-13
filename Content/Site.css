@@ -43,6 +43,8 @@ hr {
     color: gold;
 }
 
-/*.rate :hover {
-    background-color: lightgray;
-}*/
+.menu-item :hover {
+    background-color: gray;
+    color: white;
+    text-shadow: 1px 1px darkgray;
+}
