@@ -49,23 +49,23 @@
     {
         <div class="p-2 bd-highlight">
             <div class="card p-3 mb-2 bg-light text-dark" style="width: 18rem;">
-                @{
-                    if (HttpContext.Current.Session["UserId"] != null
-                        && ((HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"]) || (int)HttpContext.Current.Session["UserId"] == item.UserId))
-                    {
+                <div class="card-button">
+                    @{
+                        if (HttpContext.Current.Session["UserId"] != null
+                            && ((HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"]) || (int)HttpContext.Current.Session["UserId"] == item.UserId))
+                        {
 
-                        <div class="card-button">
-                            <a href="@Url.Action("Edit", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </a>
+                                <a href="@Url.Action("Edit", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </a>
 
-                            <a href="@Url.Action("Delete", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
-                                <i class="fa fa-close"></i>
-                            </a>
+                                <a href="@Url.Action("Delete", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                    <i class="fa fa-close"></i>
+                                </a>
 
-                        </div>
+                        }
                     }
-                }
+                </div>
 
 
 
