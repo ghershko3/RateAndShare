@@ -51,6 +51,30 @@ namespace RateAndShare.Controllers
             return View(rates);
         }
 
+        // GET: Rates/GetRecomend
+        public ActionResult GetRecomend()
+        {
+            object userSession = HttpContext.Session[UsersController.SessionName];
+            if (userSession == null)
+            {
+                return View();
+            }
+
+            var ratesGenre = db.Rates.Where(rate => rate.UserId == (int)userSession).GroupBy(rate => rate.Song.Genre).Select(rate => new { genre = rate.Key, count = rate.Count() }).ToList();
+            int maxCount = 0;
+            string maxGenre = "";
+            ratesGenre.ForEach(rate =>
+            {
+                if (rate.count > maxCount)
+                {
+                    maxCount = rate.count;
+                    maxGenre = rate.genre;
+                }
+            });
+
+            return View("Index", db.Rates.Where(rate => rate.Song.Genre == maxGenre).ToList());
+        }
+
         // GET: Rates/GetRatesFromGrade/5/1
         // A method that gets all the song's rates that have higher grade then the given
         public ActionResult GetRatesFromGrade(int p_songId, int p_fromGrade)
