@@ -7,15 +7,40 @@
 
 <link href="@Url.Content("~/Content/Rates.css")" rel="stylesheet" type="text/css" />
 
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Rates</h2>
+
+    <div class="navbar-left" style="margin-top:8px;">
+        @using (Html.BeginForm("Search", "Rates", FormMethod.Get))
+        {
+            @Html.Editor("searchVal", new { htmlAttributes = new { @class = "form-control", @type = "search" } })
+
+            @Html.RadioButton("searchType", 1, true)
+            <span class="h6">Song Name</span>
+
+            @Html.RadioButton("searchType", 2)
+            <span class="h6">Rating</span>
+
+            @Html.RadioButton("searchType", 3)
+            <span class="h6">User</span>
+        }
+    </div>
+</div>
 
 
-<h2>Rates</h2>
 
-<p>
-    <a href="@Url.Action("Create", "Rates")" class="btn btn-primary btn-lg fab">
-        <i class="fa fa-pencil"></i>
-    </a>
-</p>
+@{
+    if (HttpContext.Current.Session["UserId"] != null)
+    {
+        <p>
+            <a href="@Url.Action("Create", "Rates")" class="btn btn-primary btn-lg fab">
+                <i class="fa fa-pencil"></i>
+            </a>
+        </p>
+    }
+}
+
+
 
 
 <div class="d-flex justify-content-between flex-wrap">
@@ -25,19 +50,20 @@
         <div class="p-2 bd-highlight">
             <div class="card p-3 mb-2 bg-light text-dark" style="width: 18rem;">
                 @{
-                    if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"])
+                    if (HttpContext.Current.Session["UserId"] != null
+                        && ((HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"]) || (int)HttpContext.Current.Session["UserId"] == item.UserId))
                     {
 
-                                <div class="card-button">
-                                    <a href="@Url.Action("Edit", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+                        <div class="card-button">
+                            <a href="@Url.Action("Edit", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>
 
-                                    <a href="@Url.Action("Delete", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
-                                        <i class="fa fa-close"></i>
-                                    </a>
+                            <a href="@Url.Action("Delete", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                <i class="fa fa-close"></i>
+                            </a>
 
-                                </div>
+                        </div>
                     }
                 }
 
@@ -62,10 +88,6 @@
                     <p class="card-text">
                         <em> @(item.Description != null ? item.Description : "-No Comment For This Rate-") </em>
                     </p>
-
-                    @*@Html.ActionLink("Edit", "Edit", new { id = item.SongId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.SongId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.SongId })*@
                 </div>
             </div>
         </div>

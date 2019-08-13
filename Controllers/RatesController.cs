@@ -169,6 +169,34 @@ namespace RateAndShare.Controllers
             return View("Index", db.Rates.ToList());
         }
 
+        // Get: Rates/Delete/searchVal/1
+        public ActionResult Search(string searchVal, int searchType)
+        {
+            if(string.IsNullOrEmpty(searchVal) || searchType == 0)
+            {
+                return View("Index", db.Rates.ToList());
+            }
+            
+            try
+            {
+                switch (searchType)
+                {
+                    case 1:
+                        return View("Index", db.Rates.Where(rate => rate.Song.SongName.Contains(searchVal)).ToList());
+                    case 2:
+                        return View("Index", db.Rates.Where(rate => rate.NumOfStars.ToString() == searchVal).ToList());
+                    case 3:
+                        return View("Index", db.Rates.Where(rate => rate.User.Username.Contains(searchVal)).ToList());
+                    default:
+                        return View("Index", db.Rates.ToList());
+                }
+            }
+            catch (Exception)
+            {
+                return View("Index", new List<Rate>());
+            }
+        }
+
         private bool isUserAdmin()
         {
             object userSession = HttpContext.Session[UsersController.SessionName];
