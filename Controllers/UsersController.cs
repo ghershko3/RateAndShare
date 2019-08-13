@@ -12,6 +12,7 @@ namespace RateAndShare.Controllers
     public class UsersController : Controller
     {
         public const string SessionName = "UserId";
+        public const string SessionUserName = "UserName";
         public const string SessionIsAdminName = "IsAdmin";
 
         private RateAndShareContext db = new RateAndShareContext();
@@ -35,8 +36,10 @@ namespace RateAndShare.Controllers
                 User currUser = db.Users.First(user => user.Username == p_user.Username);
                 int userId = currUser.UserId;
                 bool isAdmin = currUser.IsAdmin;
+                string userName = currUser.Username;
 
                 HttpContext.Session.Add(SessionName, userId);
+                HttpContext.Session.Add(SessionUserName, userName);
                 HttpContext.Session.Add(SessionIsAdminName, isAdmin);
 
                 return RedirectToAction("Index", "Home");
@@ -53,6 +56,16 @@ namespace RateAndShare.Controllers
         public ActionResult Register()
         {
             ViewData["countries"] = db.Countries.ToList();
+
+            List<SelectListItem> countries = new List<SelectListItem>();
+
+            foreach (RateAndShare.Models.Country country in ((IEnumerable<RateAndShare.Models.Country>)ViewData["countries"]))
+            {
+                countries.Add(new SelectListItem { Text = country.Name, Value = country.Id.ToString() });
+            }
+
+            ViewBag.countries = countries;
+
             return View();
         }
 

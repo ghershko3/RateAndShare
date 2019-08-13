@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Rate & Share</title>
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Images/icon.png" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -12,28 +13,33 @@
     <div>
         <div class="container">
             <div class="row align-items-start justify-content-end">
-                <div class="col">
-                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                <div class="col d-flex justify-content-between">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item" id="home-tab">
+                            <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Rates", "Index", "Rates", null, new { @class = "nav-link" })
+                        <li class="nav-item" id="rates-tab">
+                            <a class="nav-link " href="@Url.Action("Index", "Rates")">Rates</a>
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Songs", "Index", "Songs", null, new { @class = "nav-link" })
+                        <li class="nav-item" id="songs-tab">
+                            <a class="nav-link " href="@Url.Action("Index", "Songs")">Songs</a>
                         </li>
                         @{
                             if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"])
                             {
-                                <li class="nav-item">
+                                <li class="nav-item" id="statistics-tab">
                                     @Html.ActionLink("Statistics", "Index", "Statistics", null, new { @class = "nav-link" })
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" id="weather-tab">
                                     @Html.ActionLink("Weather", "Index", "Countries", null, new { @class = "nav-link" })
                                 </li>
                             }
-                            else if (HttpContext.Current.Session["UserId"] == null)
+                        }
+                    </ul>
+
+                    <ul class="nav nav-pills align-middle" id="pills-tab" role="tablist">
+                        @{
+                            if (HttpContext.Current.Session["UserId"] == null)
                             {
                                 <li class="nav-item">
                                     @Html.ActionLink("Login", "Login", "Users", null, new { @class = "nav-link" })
@@ -45,8 +51,9 @@
 
                             if (HttpContext.Current.Session["UserId"] != null)
                             {
-                                <li class="nav-item right-nav-item">
-                                    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" })
+                                <li class="nav-item right-nav-item d-flex flex-row align-items-center">
+                                    @Html.ActionLink("Logout", "Logout", "Users", null, new { @class = "nav-link" }) |
+                                    <span class="p-2">Hi @HttpContext.Current.Session["userName"]</span>
                                 </li>
                             }
                         }
@@ -64,7 +71,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/Layout.js"></script>
-    <script src="~/Scripts/bootstrap-rating/bootstrap-rating.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

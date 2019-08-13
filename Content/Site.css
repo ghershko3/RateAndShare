@@ -18,6 +18,10 @@ textarea {
     max-width: 280px;
 }
 
+hr {
+    border-color: lightgray
+}
+
 .nav-pills > li > a {
     color: lightgray;
 }
@@ -30,8 +34,9 @@ textarea {
 .fab {
     border-radius: 50%;
     bottom: 60px;
-    right: 15vw;
-    position: absolute;
+    right: 10vw;
+    position: fixed;
+    z-index: 1;
 }
 
 .fa-star {

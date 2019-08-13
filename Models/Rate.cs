@@ -21,6 +21,7 @@ namespace RateAndShare.Models
         [Required]
         public int UserId { get; set; }
 
+        [DisplayName("Comment")]
         [StringLength(100)]
         public string Description { get; set; }
 

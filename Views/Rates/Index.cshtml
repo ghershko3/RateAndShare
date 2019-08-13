@@ -5,10 +5,16 @@
 @model IEnumerable<RateAndShare.Models.Rate>
 
 
+<link href="@Url.Content("~/Content/Rates.css")" rel="stylesheet" type="text/css" />
+
+
+
 <h2>Rates</h2>
 
 <p>
-    @Html.ActionLink("+", "Create", "Rates", null, new { @class = "btn btn-outline-light fab" })
+    <a href="@Url.Action("Create", "Rates")" class="btn btn-primary btn-lg fab">
+        <i class="fa fa-pencil"></i>
+    </a>
 </p>
 
 
@@ -18,6 +24,25 @@
     {
         <div class="p-2 bd-highlight">
             <div class="card p-3 mb-2 bg-light text-dark" style="width: 18rem;">
+                @{
+                    if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["IsAdmin"] != null && (bool)HttpContext.Current.Session["IsAdmin"])
+                    {
+
+                                <div class="card-button">
+                                    <a href="@Url.Action("Edit", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <a href="@Url.Action("Delete", "Rates", new { id = item.ID })" class="btn btn-outline-dark btn-sm">
+                                        <i class="fa fa-close"></i>
+                                    </a>
+
+                                </div>
+                    }
+                }
+
+
+
                 <div class="card-body">
                     <div class="card-title">
                         <h5>
@@ -35,12 +60,12 @@
 
 
                     <p class="card-text">
-                        
+                        <em> @(item.Description != null ? item.Description : "-No Comment For This Rate-") </em>
                     </p>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.SongId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.SongId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.SongId })
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.SongId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.SongId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.SongId })*@
                 </div>
             </div>
         </div>
@@ -50,49 +75,6 @@
 
 
 
-
-
-@*<div>
-    @foreach (var item in Model)
-    {
-    <div class="d-flex flex-column bd-highlight mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="p-2">
-                <h5>
-                    @item.Song.SongName
-                    <small class="text-muted">by @item.User.Username</small>
-                </h5>
-            </div>
-
-            <div>
-                @{ foreach (int i in Enumerable.Range(0, item.NumOfStars))
-                    {
-                        <i class="fa fa-star"></i>
-                    }
-                }
-            </div>
-
-            <div class="p-2 bd-highlight">
-                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapse_@(item.ID)" aria-expanded="false" aria-controls="collapse_@(item.ID)">
-                    view comment
-                    <i class="fa fa-angle-down"></i>
-                </button>
-            </div>
-        </div>
-        <div class="p-2 bd-highlight">
-            <div class="collapse" id="collapse_@(item.ID)">
-                <div class="card card-body">
-                    <span>
-                        @(item.Description != null ? item.Description : "No Comment For This Rate")
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    }
-</div>*@
 
 
 

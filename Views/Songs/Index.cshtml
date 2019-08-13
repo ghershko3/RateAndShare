@@ -7,7 +7,9 @@
 <h2>Songs</h2>
 
 <p>
-    @Html.ActionLink("+", "Create", "Songs", null, new { @class = "btn btn-outline-light fab" })
+    <a href="@Url.Action("Create", "Songs")" class = "btn btn-primary btn-lg fab">
+        <i class="fa fa-plus"></i>
+    </a>
 </p>
 
 

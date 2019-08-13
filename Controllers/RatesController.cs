@@ -95,10 +95,18 @@ namespace RateAndShare.Controllers
             }
             else
             {
-                return RedirectToRoute("Users");
+                return RedirectToRoute(new{ controller = "Users", action = "Login" });
             }
 
-            return View();
+            return RedirectToRoute(new { controller = "Rates", action = "Index" });
+        }
+
+
+        // GET: Rates/Edit/ID
+        public ActionResult Edit(int ID)
+        {
+            ViewBag.songsList = new SelectList(db.Songs, "SongId", "SongName");
+            return View(db.Rates.Find(ID));
         }
 
         // POST: Rates/Edit
@@ -108,7 +116,7 @@ namespace RateAndShare.Controllers
             object userSession = HttpContext.Session[UsersController.SessionName];
             if (userSession == null)
             {
-                return RedirectToRoute("Users");
+                return RedirectToRoute(new { controller = "Users", action = "Login" });
             }
             else if (!ModelState.IsValid)
             {
@@ -122,7 +130,9 @@ namespace RateAndShare.Controllers
             // Or that the current is user is the admin
             if (isUserAdmin() || currentRate.UserId == userId)
             {
-                db.Entry(p_rate).State = System.Data.Entity.EntityState.Modified;
+                currentRate.NumOfStars = p_rate.NumOfStars;
+                currentRate.SongId = p_rate.SongId;
+                currentRate.Description = p_rate.Description;
                 await db.SaveChangesAsync();
             }
             else
@@ -130,18 +140,17 @@ namespace RateAndShare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            return View();
+            return View("Index", db.Rates.ToList());
         }
 
-        // POST: Rates/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        // Get: Rates/Delete/5
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             object userSession = HttpContext.Session[UsersController.SessionName];
             if (userSession == null)
             {
-                return RedirectToRoute("Users");
+                return RedirectToRoute(new { controller = "Users", action = "Login" });
             }
 
             int userId = (int)userSession;
@@ -157,7 +166,7 @@ namespace RateAndShare.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
 
-            return View();
+            return View("Index", db.Rates.ToList());
         }
 
         private bool isUserAdmin()
